@@ -22,9 +22,21 @@
         android:layout_margin="8dp"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_delete_button"
         app:layout_constraintStart_toEndOf="@+id/item_avatar_imageview"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/first_names" />
+
+    <ImageButton
+        android:id="@+id/item_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@null"
+        android:tint="?attr/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_delete_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,7 +11,7 @@ import com.denisanfossi.myuserlist.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity implements UserListAdapter.Listener {
 
     private final List<User> mUsers = new ArrayList<>();
     private ActivityUserListBinding mBinding;
@@ -39,7 +39,13 @@ public class UserListActivity extends AppCompatActivity {
     }
 
     private void configureRecyclerView() {
-        mUserListAdapter = new UserListAdapter(mUsers);
+        mUserListAdapter = new UserListAdapter(mUsers, this);
         mBinding.activityUserListRecyclerView.setAdapter(mUserListAdapter);
+    }
+
+    @Override
+    public void onClickDeleteButton(int position) {
+        Injection.getUsersRepository().deleteUser(mUsers.get(position));
+        refreshUserList();
     }
 }
