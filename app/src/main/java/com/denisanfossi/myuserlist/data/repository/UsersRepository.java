@@ -17,6 +17,12 @@ public class UsersRepository {
     }
 
     // TODO add method createUser
+    public void createUser(User user) {
+        mUsersDataSource.createUser(user);
+    }
 
     // TODO add method deleteUser
+    public void deleteUser(User user) {
+        mUsersDataSource.deleteUser(user);
+    }
 }
