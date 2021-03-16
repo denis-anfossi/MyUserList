@@ -6,6 +6,7 @@ import com.denisanfossi.myuserlist.di.Injection;
 import com.denisanfossi.myuserlist.model.User;
 
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,6 +32,21 @@ public class UserRepositoryTest {
     }
 
     // TODO add test createUser
+    @Test
+    public void createWithSuccess() {
+        User userToCreate = new User(15L, "Denis", "https://avatars.dicebear.com/api/bottts/Denis.png");
+
+        Assert.assertFalse(mUsersRepository.getUsers().contains(userToCreate));
+        mUsersRepository.createUser(userToCreate);
+        Assert.assertTrue(mUsersRepository.getUsers().contains(userToCreate));
+    }
 
     // TODO add test deleteUser
+    @Test
+    public void deleteWithSuccess() {
+        User userToDelete = mUsersRepository.getUsers().get(0);
+        Assert.assertTrue(mUsersRepository.getUsers().contains(userToDelete));
+        mUsersRepository.deleteUser(userToDelete);
+        Assert.assertFalse(mUsersRepository.getUsers().contains(userToDelete));
+    }
 }

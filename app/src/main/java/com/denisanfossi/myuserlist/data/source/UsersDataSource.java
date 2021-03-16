@@ -9,6 +9,8 @@ public interface UsersDataSource {
     List<User> getUsers();
 
     // TODO add method createUser
+    void createUser(User user);
 
     // TODO add method deleteUser
+    void deleteUser(User user);
 }
