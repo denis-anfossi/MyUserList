@@ -6,13 +6,14 @@ import com.denisanfossi.myuserlist.di.Injection;
 import com.denisanfossi.myuserlist.model.User;
 
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class UserRepositoryTest {
     private UsersRepository mUsersRepository;
@@ -33,20 +34,19 @@ public class UserRepositoryTest {
 
     // TODO add test createUser
     @Test
-    public void createWithSuccess() {
-        User userToCreate = new User(15L, "Denis", "https://avatars.dicebear.com/api/bottts/Denis.png");
-
-        Assert.assertFalse(mUsersRepository.getUsers().contains(userToCreate));
-        mUsersRepository.createUser(userToCreate);
-        Assert.assertTrue(mUsersRepository.getUsers().contains(userToCreate));
+    public void createUserWithSuccess() {
+        User user = new User(15L, "Fabrice", "https://avatars.dicebear.com/api/bottts/Fabrice.png");
+        assertFalse(mUsersRepository.getUsers().contains(user));
+        mUsersRepository.createUser(user);
+        assertTrue(mUsersRepository.getUsers().contains(user));
     }
 
     // TODO add test deleteUser
     @Test
-    public void deleteWithSuccess() {
-        User userToDelete = mUsersRepository.getUsers().get(0);
-        Assert.assertTrue(mUsersRepository.getUsers().contains(userToDelete));
-        mUsersRepository.deleteUser(userToDelete);
-        Assert.assertFalse(mUsersRepository.getUsers().contains(userToDelete));
+    public void deleteUserWithSuccess() {
+        User user = mUsersRepository.getUsers().get(0);
+        assertTrue(mUsersRepository.getUsers().contains(user));
+        mUsersRepository.deleteUser(user);
+        assertFalse(mUsersRepository.getUsers().contains(user));
     }
 }

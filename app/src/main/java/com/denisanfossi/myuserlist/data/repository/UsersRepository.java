@@ -22,7 +22,7 @@ public class UsersRepository {
     }
 
     // TODO add method deleteUser
-    public void deleteUser(User userToDelete) {
-        mUsersDataSource.deleteUser(userToDelete);
+    public void deleteUser(User user) {
+        mUsersDataSource.deleteUser(user);
     }
 }
