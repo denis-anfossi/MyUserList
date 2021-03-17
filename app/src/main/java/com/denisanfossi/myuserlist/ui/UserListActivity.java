@@ -1,6 +1,8 @@
 package com.denisanfossi.myuserlist.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +26,22 @@ public class UserListActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
 
         configureRecyclerView();
+        configureFAB();
+    }
+
+    private void configureRecyclerView() {
+        mUserListAdapter = new UserListAdapter(mUsers);
+        mBinding.activityUserListRecyclerView.setAdapter(mUserListAdapter);
+    }
+
+    private void configureFAB() {
+        mBinding.activityUserListFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), CreateUserActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -38,8 +56,4 @@ public class UserListActivity extends AppCompatActivity {
         mUserListAdapter.notifyDataSetChanged();
     }
 
-    private void configureRecyclerView() {
-        mUserListAdapter = new UserListAdapter(mUsers);
-        mBinding.activityUserListRecyclerView.setAdapter(mUserListAdapter);
-    }
 }
