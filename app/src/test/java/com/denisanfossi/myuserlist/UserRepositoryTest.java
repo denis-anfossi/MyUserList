@@ -32,7 +32,6 @@ public class UserRepositoryTest {
         assertThat(users, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedUsers.toArray()));
     }
 
-    // TODO add test createUser
     @Test
     public void createUserWithSuccess() {
         User user = new User(15L, "Fabrice", "https://avatars.dicebear.com/api/bottts/Fabrice.png");
@@ -41,7 +40,6 @@ public class UserRepositoryTest {
         assertTrue(mUsersRepository.getUsers().contains(user));
     }
 
-    // TODO add test deleteUser
     @Test
     public void deleteUserWithSuccess() {
         User user = mUsersRepository.getUsers().get(0);
