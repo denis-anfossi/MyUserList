@@ -30,7 +30,7 @@ public class UserListActivity extends AppCompatActivity implements UserListAdapt
     }
 
     private void configureRecyclerView() {
-        mUserListAdapter = new UserListAdapter(mUsers);
+        mUserListAdapter = new UserListAdapter(mUsers, this);
         mBinding.activityUserListRecyclerView.setAdapter(mUserListAdapter);
     }
 
