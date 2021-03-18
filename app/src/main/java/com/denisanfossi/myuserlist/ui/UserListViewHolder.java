@@ -20,7 +20,7 @@ public class UserListViewHolder extends RecyclerView.ViewHolder {
         mBinding = binding;
     }
 
-    public void bind(User user) {
+    public void bind(User user, UserListAdapter.Listener callback) {
         mBinding.itenNameTextview.setText(user.getName());
         Glide.with(mBinding.itemAvatarImageview).load(user.getAvatarUrl()).into(mBinding.itemAvatarImageview);
         mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
@@ -29,6 +29,12 @@ public class UserListViewHolder extends RecyclerView.ViewHolder {
                 Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
                 intent.putExtra("user", user);
                 view.getContext().startActivity(intent);
+            }
+        });
+        mBinding.itemDeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callback.onClickDeleteButton(getAdapterPosition());
             }
         });
     }
