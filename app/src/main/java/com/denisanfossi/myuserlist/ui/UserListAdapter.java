@@ -14,11 +14,11 @@ import java.util.List;
 public class UserListAdapter extends RecyclerView.Adapter<UserListViewHolder> {
 
     private final List<User> mUsers;
-    private final UserListAdapter.Listener mCallback;
+    private final Listener mCallback;
 
-    public UserListAdapter(List<User> users, UserListActivity userListActivity) {
+    public UserListAdapter(List<User> users, Listener callback) {
         mUsers = users;
-        mCallback = userListActivity;
+        mCallback = callback;
     }
 
     @NonNull
@@ -39,7 +39,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListViewHolder> {
         return mUsers.size();
     }
 
-    interface Listener {
+    public interface Listener {
         void onClickDeleteButton(int position);
     }
 }
