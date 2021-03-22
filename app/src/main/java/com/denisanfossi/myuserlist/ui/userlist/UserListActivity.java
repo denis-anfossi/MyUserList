@@ -1,14 +1,15 @@
-package com.denisanfossi.myuserlist.ui;
+package com.denisanfossi.myuserlist.ui.userlist;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.denisanfossi.myuserlist.databinding.ActivityUserListBinding;
-import com.denisanfossi.myuserlist.di.Injection;
 import com.denisanfossi.myuserlist.model.User;
+import com.denisanfossi.myuserlist.ui.createuser.CreateUserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class UserListActivity extends AppCompatActivity implements UserListAdapt
     private final List<User> mUsers = new ArrayList<>();
     private ActivityUserListBinding mBinding;
     private UserListAdapter mUserListAdapter;
+    private UserListViewModel mUserListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,20 @@ public class UserListActivity extends AppCompatActivity implements UserListAdapt
         mBinding = ActivityUserListBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
 
+        configureViewModel();
         configureRecyclerView();
         configureFAB();
+    }
+
+    private void configureViewModel() {
+        mUserListViewModel = new ViewModelProvider(this).get(UserListViewModel.class);
+        mUserListViewModel.getUsers().observe(this, this::refreshUserList);
+    }
+
+    private void refreshUserList(List<User> users) {
+        mUsers.clear();
+        mUsers.addAll(users);
+        mUserListAdapter.notifyDataSetChanged();
     }
 
     private void configureRecyclerView() {
@@ -45,20 +59,7 @@ public class UserListActivity extends AppCompatActivity implements UserListAdapt
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        refreshUserList();
-    }
-
-    private void refreshUserList() {
-        mUsers.clear();
-        mUsers.addAll(Injection.getUsersRepository().getUsers());
-        mUserListAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onClickDeleteButton(int position) {
-        Injection.getUsersRepository().deleteUser(mUsers.get(position));
-        refreshUserList();
+        mUserListViewModel.deleteUser(mUsers.get(position));
     }
 }

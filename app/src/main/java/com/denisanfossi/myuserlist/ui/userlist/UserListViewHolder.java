@@ -1,4 +1,4 @@
-package com.denisanfossi.myuserlist.ui;
+package com.denisanfossi.myuserlist.ui.userlist;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.denisanfossi.myuserlist.databinding.ItemUserListBinding;
 import com.denisanfossi.myuserlist.model.User;
+import com.denisanfossi.myuserlist.ui.UserProfileActivity;
 
 import java.lang.ref.WeakReference;
 

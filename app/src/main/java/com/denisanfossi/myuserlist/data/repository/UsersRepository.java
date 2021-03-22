@@ -1,5 +1,7 @@
 package com.denisanfossi.myuserlist.data.repository;
 
+import androidx.lifecycle.LiveData;
+
 import com.denisanfossi.myuserlist.data.source.UsersDataSource;
 import com.denisanfossi.myuserlist.model.User;
 
@@ -12,7 +14,7 @@ public class UsersRepository {
         mUsersDataSource = usersDataSource;
     }
 
-    public List<User> getUsers() {
+    public LiveData<List<User>> getUsers() {
         return mUsersDataSource.getUsers();
     }
 

@@ -7,6 +7,7 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.denisanfossi.myuserlist.R;
+import com.denisanfossi.myuserlist.ui.userlist.UserListActivity;
 
 import org.junit.Rule;
 import org.junit.Test;

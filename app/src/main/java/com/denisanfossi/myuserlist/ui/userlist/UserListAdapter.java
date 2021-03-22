@@ -1,4 +1,4 @@
-package com.denisanfossi.myuserlist.ui;
+package com.denisanfossi.myuserlist.ui.userlist;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
