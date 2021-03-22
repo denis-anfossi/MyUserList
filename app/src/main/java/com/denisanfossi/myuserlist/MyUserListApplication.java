@@ -9,6 +9,6 @@ public class MyUserListApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        Injection.startInjection();
+        Injection.startInjectionWithContext(getApplicationContext());
     }
 }

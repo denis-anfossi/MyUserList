@@ -1,15 +1,35 @@
 package com.denisanfossi.myuserlist.model;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity(tableName = "users")
 public class User implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "id")
     private Long id;
+
+    @NonNull
+    @ColumnInfo(name = "name")
     private String name;
+
+    @ColumnInfo(name = "avatar_url")
     private String avatarUrl;
 
+    public User(String name, String avatarUrl) {
+        this.name = name;
+        this.avatarUrl = avatarUrl;
+    }
+
+    @Ignore
     public User(Long id, String name, String avatarUrl) {
         this.id = id;
         this.name = name;

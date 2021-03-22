@@ -1,5 +1,7 @@
 package com.denisanfossi.myuserlist;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+
 import com.denisanfossi.myuserlist.data.repository.UsersRepository;
 import com.denisanfossi.myuserlist.data.source.FakeUsersGenerator;
 import com.denisanfossi.myuserlist.di.Injection;
@@ -7,6 +9,7 @@ import com.denisanfossi.myuserlist.model.User;
 
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,6 +21,9 @@ import static org.junit.Assert.assertTrue;
 public class UserRepositoryTest {
     private UsersRepository mUsersRepository;
 
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
     @Before
     public void setup() {
         Injection.startInjection();
@@ -25,26 +31,26 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void getUsersWithSuccess() {
-        List<User> users = mUsersRepository.getUsers();
+    public void getUsersWithSuccess() throws InterruptedException {
+        List<User> users = LiveDataTestUtil.getValue(mUsersRepository.getUsers());
         List<User> expectedUsers = FakeUsersGenerator.FAKE_USERS;
 
         assertThat(users, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedUsers.toArray()));
     }
 
     @Test
-    public void createUserWithSuccess() {
+    public void createUserWithSuccess() throws InterruptedException {
         User user = new User(15L, "Fabrice", "https://avatars.dicebear.com/api/bottts/Fabrice.png");
-        assertFalse(mUsersRepository.getUsers().contains(user));
+        assertFalse(LiveDataTestUtil.getValue(mUsersRepository.getUsers()).contains(user));
         mUsersRepository.createUser(user);
-        assertTrue(mUsersRepository.getUsers().contains(user));
+        assertTrue(LiveDataTestUtil.getValue(mUsersRepository.getUsers()).contains(user));
     }
 
     @Test
-    public void deleteUserWithSuccess() {
-        User user = mUsersRepository.getUsers().get(0);
-        assertTrue(mUsersRepository.getUsers().contains(user));
+    public void deleteUserWithSuccess() throws InterruptedException {
+        User user = LiveDataTestUtil.getValue(mUsersRepository.getUsers()).get(0);
+        assertTrue(LiveDataTestUtil.getValue(mUsersRepository.getUsers()).contains(user));
         mUsersRepository.deleteUser(user);
-        assertFalse(mUsersRepository.getUsers().contains(user));
+        assertFalse(LiveDataTestUtil.getValue(mUsersRepository.getUsers()).contains(user));
     }
 }
