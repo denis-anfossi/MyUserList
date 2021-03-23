@@ -17,8 +17,8 @@ public class User implements Serializable {
     @ColumnInfo(name = "id")
     private Long id;
 
-    @ColumnInfo(name = "name")
     @NonNull
+    @ColumnInfo(name = "name")
     private String name;
 
     @ColumnInfo(name = "avatar_url")

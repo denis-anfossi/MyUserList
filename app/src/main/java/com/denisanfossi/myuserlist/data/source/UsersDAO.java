@@ -12,7 +12,6 @@ import java.util.List;
 
 @Dao
 public abstract class UsersDAO implements UsersDataSource {
-
     @Override
     @Query("SELECT * FROM users")
     public abstract LiveData<List<User>> getUsers();

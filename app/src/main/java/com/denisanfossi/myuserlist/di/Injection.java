@@ -4,14 +4,14 @@ import android.content.Context;
 
 import com.denisanfossi.myuserlist.data.repository.UsersRepository;
 import com.denisanfossi.myuserlist.data.source.FakeUsersDataSource;
-import com.denisanfossi.myuserlist.data.source.UserDatabase;
+import com.denisanfossi.myuserlist.data.source.MyUserListDatabase;
 import com.denisanfossi.myuserlist.data.source.UsersDAO;
 
 public class Injection {
     private static UsersRepository sUsersRepository;
 
     public static void startInjectionWithContext(Context applicationContext) {
-        UsersDAO usersDAO = UserDatabase.getDatabase(applicationContext).usersDAO();
+        UsersDAO usersDAO = MyUserListDatabase.getDatabase(applicationContext).usersDAO();
         sUsersRepository = new UsersRepository(usersDAO);
     }
 
