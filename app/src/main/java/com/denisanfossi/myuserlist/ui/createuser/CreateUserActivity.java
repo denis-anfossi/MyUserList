@@ -9,8 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.denisanfossi.myuserlist.databinding.ActivityCreateUserBinding;
 import com.denisanfossi.myuserlist.model.User;
 
-import java.util.Random;
-
 public class CreateUserActivity extends AppCompatActivity {
 
     private ActivityCreateUserBinding mBinding;
@@ -36,9 +34,8 @@ public class CreateUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = mBinding.nameEdittext.getText().toString();
                 if (!name.isEmpty()) {
-                    Long id = new Random().nextLong();
                     String avatarUrl = "https://avatars.dicebear.com/api/bottts/" + name + ".png";
-                    User user = new User(id, name, avatarUrl);
+                    User user = new User(name, avatarUrl);
                     mCreateUserViewModel.createUser(user);
                     finish();
                 }
